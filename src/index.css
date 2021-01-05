@@ -1,28 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-size: 10px;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
 
 body {
-    min-height: 100vh;
-    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("./images/PL-pl-20201228-popsignuptwoweeks-perspective_alpha_website_large.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    color: #f1f1f1;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url("./images/PL-pl-20201228-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #f1f1f1;
+  font-family: "Montserrat", sans-serif;
 }
 
 a {
-    text-decoration: none;
-    display: inline-block;
-  }
-  
-  img {
-    display: block;
-    max-width: 100%;
-  }
+  text-decoration: none;
+  display: inline-block;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
