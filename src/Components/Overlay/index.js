@@ -1,4 +1,5 @@
 import React from "react";
+import StarRating from "../StarRating";
 import { OverlayWrapper } from "./OverlayElements";
 
 const Overlay = ({
@@ -12,9 +13,12 @@ const Overlay = ({
   handleClickHeart,
   handleClickTrash,
   buttonSrcTrash,
+  rating,
 }) => {
   return (
     <OverlayWrapper className="overlay">
+      <StarRating rating={rating} />
+      <MovieTitle title={title} />
       {buttonSrcHeart && (
         <Button
           buttonSrc={buttonSrcHeart}
@@ -38,7 +42,6 @@ const Overlay = ({
           movie={movie}
         />
       )}
-      <MovieTitle title={title} />
     </OverlayWrapper>
   );
 };

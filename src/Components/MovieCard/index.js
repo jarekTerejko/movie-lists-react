@@ -20,6 +20,7 @@ const MovieCard = ({
     <MovieCardWrapper>
       <MovieCardPoster src={`${imgBaseUrl}${imgPoster}${movie.poster_path}`} />
       <Overlay
+        rating={movie.vote_average}
         title={movie.title}
         MovieTitle={MovieTitle}
         Button={Button}
