@@ -25,7 +25,9 @@ const App = () => {
   return (
     <>
       <Container>
-        {movies.length && <ListTitle listName={allMovies} />}
+        {movies.length && (
+          <ListTitle className="movies--all" listName={allMovies} />
+        )}
         <MovieList
           movies={movies}
           buttonSrcTv={Tv}
@@ -33,7 +35,12 @@ const App = () => {
           buttonSrcHeart={Heart}
           handleClickHeart={handleAddToFavourites}
         />
-        {favourites.length > 0 && <ListTitle listName={favouritesMovies} />}
+        {favourites.length > 0 && (
+          <ListTitle
+            className="movies--favourites"
+            listName={favouritesMovies}
+          />
+        )}
         <MovieList
           movies={favourites}
           buttonSrcTrash={Trash}
@@ -41,7 +48,12 @@ const App = () => {
           buttonSrcTv={Tv}
           handleClickTv={handleAddToWatchLater}
         />
-        {watchLater.length > 0 && <ListTitle listName={watchLaterMovies} />}
+        {watchLater.length > 0 && (
+          <ListTitle
+            className="movies--watch-list"
+            listName={watchLaterMovies}
+          />
+        )}
         <MovieList
           movies={watchLater}
           buttonSrcTrash={Trash}
