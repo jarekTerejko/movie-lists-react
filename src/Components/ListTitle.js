@@ -5,6 +5,7 @@ const ListTitleElement = styled.h2`
   font-size: 4rem;
   padding-left: 2rem;
   margin-top: 3rem;
+  margin-bottom: 3rem;
   position: relative;
 
   &::before {
@@ -23,7 +24,7 @@ const ListTitleElement = styled.h2`
   &.movies--favourites::before {
     background: #e50914;
   }
-  
+
   &.movies--watch-list::before {
     background: #3490de;
   }

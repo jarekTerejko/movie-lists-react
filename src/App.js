@@ -25,7 +25,7 @@ const App = () => {
   return (
     <>
       <Container>
-        {movies.length && (
+        {movies.length > 0 && (
           <ListTitle className="movies--all" listName={allMovies} />
         )}
         <MovieList

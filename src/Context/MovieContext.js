@@ -4,6 +4,11 @@ import { apiKey, apiUrl, imgBaseUrl, imgPoster } from "../config";
 export const MovieContext = createContext();
 
 const MovieContextProvider = (props) => {
+  const initialFavourites =
+    JSON.parse(localStorage.getItem("favourites")) || [];
+  const initialWatchLater =
+    JSON.parse(localStorage.getItem("watchLater")) || [];
+
   const [movies, setMovies] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [watchLater, setWatchLater] = useState([]);
@@ -18,17 +23,12 @@ const MovieContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    const initialFavourites = JSON.parse(
-      localStorage.getItem("favourites") || []
-    );
-    const initialWatchLater = JSON.parse(
-      localStorage.getItem("watchLater") || []
-    );
     setFavourites(initialFavourites);
     setWatchLater(initialWatchLater);
     // return () => {
     //   cleanup
     // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const MovieContextProvider = (props) => {
 
     const newFavourites = [...favourites, movie];
     setFavourites(newFavourites);
-    localStorage.setItem("favourites", JSON.stringify(favourites));
+    // localStorage.setItem("favourites", JSON.stringify(favourites));
   };
 
   const handleRemoveFromFavourites = (movie) => {

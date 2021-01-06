@@ -4,7 +4,6 @@ import MovieCard from "../MovieCard";
 
 const MovieList = ({
   movies,
-
   buttonSrcTv,
   handleClickTv,
   buttonSrcHeart,
@@ -12,7 +11,7 @@ const MovieList = ({
   buttonSrcTrash,
   handleClickTrash,
 }) => {
-  if (movies.length) {
+  if (movies) {
     return (
       <MovieListWrapper>
         {console.log(movies)}
