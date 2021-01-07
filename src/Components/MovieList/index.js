@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MovieListWrapper, MovieListContainer } from "./MovieListElements";
 import MovieCard from "../MovieCard";
+import { SearchFormBtn } from "../SearchForm/SearchFormElements";
+import { MovieContext } from "../../Context/MovieContext";
 
 const MovieList = ({
   movies,
@@ -10,8 +12,11 @@ const MovieList = ({
   handleClickHeart,
   buttonSrcTrash,
   handleClickTrash,
+  showBtn,
 }) => {
-  if (movies) {
+  const { totalPages, currentPage, getMoreMovies } = useContext(MovieContext);
+
+  if (movies.length > 0) {
     return (
       <MovieListWrapper>
         {console.log(movies)}
@@ -31,6 +36,11 @@ const MovieList = ({
                 />
               );
             })}
+            {totalPages > currentPage && showBtn && (
+              <SearchFormBtn showBtn onClick={getMoreMovies}>
+                Get More
+              </SearchFormBtn>
+            )}
           </MovieListWrapper>
         </MovieListContainer>
       </MovieListWrapper>

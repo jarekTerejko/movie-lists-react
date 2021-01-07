@@ -12,6 +12,9 @@ const MovieContextProvider = (props) => {
   const [movies, setMovies] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [watchLater, setWatchLater] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=1`;
@@ -50,7 +53,6 @@ const MovieContextProvider = (props) => {
 
     const newFavourites = [...favourites, movie];
     setFavourites(newFavourites);
-    // localStorage.setItem("favourites", JSON.stringify(favourites));
   };
 
   const handleRemoveFromFavourites = (movie) => {
@@ -79,8 +81,58 @@ const MovieContextProvider = (props) => {
       console.log(data);
       if (data.results) {
         setMovies(data.results);
+        setCurrentPage(data.page);
+        setTotalPages(data.total_pages);
       }
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    searchMovies(searchTerm);
+    e.preventDefault();
+  };
+
+  const searchMovies = async (searchTerm) => {
+    // setLoading(true);
+    setMovies([]);
+    let endpoint = "";
+
+    if (searchTerm === "") {
+      endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=1`;
+    } else {
+      endpoint = `${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}`;
+    }
+
+    await getMovies(endpoint);
+  };
+
+  const getMoreMovies = async (endpoint) => {
+    // let endpoint = "";
+    // setLoading(true);
+    if (searchTerm === "") {
+      endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=${
+        currentPage + 1
+      }`;
+    } else {
+      endpoint = `${apiUrl}search/movie?api_key=${apiKey}&query=${searchTerm}&page=${
+        currentPage + 1
+      }`;
+    }
+
+    try {
+      // setLoading(true);
+      const response = await fetch(endpoint);
+      const data = await response.json();
+      // console.log(data);
+      setMovies([...movies, ...data.results]);
+      // console.log(movies);
+      setCurrentPage(data.page);
+      setTotalPages(data.total_pages);
+      // setLoading(false);
+    } catch (error) {
+      // setLoading(false);
       console.log(error);
     }
   };
@@ -97,6 +149,13 @@ const MovieContextProvider = (props) => {
         handleRemoveFromFavourites,
         handleAddToWatchLater,
         handleRemoveFromWatchLater,
+        searchTerm,
+        setSearchTerm,
+        searchMovies,
+        handleSubmit,
+        getMoreMovies,
+        totalPages,
+        currentPage,
       }}
     >
       {props.children}

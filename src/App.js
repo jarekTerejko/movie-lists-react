@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Container } from "./Components/Container";
 import ListTitle from "./Components/ListTitle";
 import MovieList from "./Components/MovieList";
+import SearchForm from "./Components/SearchForm";
 import { MovieContext } from "./Context/MovieContext";
 import Heart from "./images/heart.svg";
 import Trash from "./images/trash.svg";
@@ -16,6 +17,8 @@ const App = () => {
     watchLater,
     handleAddToWatchLater,
     handleRemoveFromWatchLater,
+    getMoreMovies,
+    totalPages,
   } = useContext(MovieContext);
 
   const allMovies = "Movies";
@@ -25,6 +28,7 @@ const App = () => {
   return (
     <>
       <Container>
+        <SearchForm />
         {movies.length > 0 && (
           <ListTitle className="movies--all" listName={allMovies} />
         )}
@@ -34,6 +38,9 @@ const App = () => {
           handleClickTv={handleAddToWatchLater}
           buttonSrcHeart={Heart}
           handleClickHeart={handleAddToFavourites}
+          getMoreMovies={getMoreMovies}
+          totalPages={totalPages}
+          showBtn={true}
         />
         {favourites.length > 0 && (
           <ListTitle
