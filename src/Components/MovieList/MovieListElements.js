@@ -4,6 +4,7 @@ export const MovieListContainer = styled.div``;
 export const MovieListWrapper = styled.div`
   display: flex;
   overflow-x: auto;
-  padding: 2rem 0rem;
+  /* padding: 2rem 0rem; */
   align-items: center;
+  min-height: 600px;
 `;

@@ -15,6 +15,7 @@ const MovieContextProvider = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=1`;
@@ -84,15 +85,18 @@ const MovieContextProvider = (props) => {
 
   const getMovies = async (endpoint) => {
     try {
+      setIsLoading(true);
       const response = await fetch(endpoint);
       const data = await response.json();
       console.log(data);
       if (data.results) {
+        setIsLoading(false);
         setMovies(data.results);
         setCurrentPage(data.page);
         setTotalPages(data.total_pages);
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -103,7 +107,6 @@ const MovieContextProvider = (props) => {
   };
 
   const searchMovies = async (searchTerm) => {
-    // setLoading(true);
     setMovies([]);
     let endpoint = "";
 
@@ -117,8 +120,6 @@ const MovieContextProvider = (props) => {
   };
 
   const getMoreMovies = async (endpoint) => {
-    // let endpoint = "";
-    // setLoading(true);
     if (searchTerm === "") {
       endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=${
         currentPage + 1
@@ -130,17 +131,19 @@ const MovieContextProvider = (props) => {
     }
 
     try {
-      // setLoading(true);
+      setIsLoading(true);
       const response = await fetch(endpoint);
       const data = await response.json();
       // console.log(data);
-      setMovies([...movies, ...data.results]);
-      // console.log(movies);
-      setCurrentPage(data.page);
-      setTotalPages(data.total_pages);
-      // setLoading(false);
+      if (data.results) {
+        setMovies([...movies, ...data.results]);
+        // console.log(movies);
+        setCurrentPage(data.page);
+        setTotalPages(data.total_pages);
+        setIsLoading(false);
+      }
     } catch (error) {
-      // setLoading(false);
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -166,6 +169,7 @@ const MovieContextProvider = (props) => {
         currentPage,
         clearFavourites,
         clearWatchLater,
+        isLoading,
       }}
     >
       {props.children}

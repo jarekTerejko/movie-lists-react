@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Container } from "./Components/Container";
 import ListTitle from "./Components/ListTitle";
+import Loader from "./Components/Loader";
 import MovieList from "./Components/MovieList";
 import SearchForm from "./Components/SearchForm";
 import { MovieContext } from "./Context/MovieContext";
@@ -20,6 +21,7 @@ const App = () => {
     getMoreMovies,
     clearFavourites,
     clearWatchLater,
+    isLoading,
   } = useContext(MovieContext);
 
   const allMovies = "Movies";
@@ -28,6 +30,7 @@ const App = () => {
 
   return (
     <>
+      {isLoading ? <Loader /> : null}
       <Container>
         <SearchForm />
         {movies.length > 0 && (
