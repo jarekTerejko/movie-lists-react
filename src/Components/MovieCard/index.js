@@ -4,6 +4,7 @@ import Overlay from "../Overlay";
 import MovieTitle from "../MovieTitle";
 import { MovieCardWrapper, MovieCardPoster } from "./MovieCardElements";
 import Button from "../Button";
+import NoImage from "../../images/no-image-available.jpg";
 
 const MovieCard = ({
   movie,
@@ -18,7 +19,13 @@ const MovieCard = ({
 
   return (
     <MovieCardWrapper>
-      <MovieCardPoster src={`${imgBaseUrl}${imgPoster}${movie.poster_path}`} />
+      <MovieCardPoster
+        src={
+          movie.poster_path
+            ? `${imgBaseUrl}${imgPoster}${movie.poster_path}`
+            : NoImage
+        }
+      />
       <Overlay
         rating={movie.vote_average}
         title={movie.title}
