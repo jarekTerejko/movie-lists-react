@@ -12,9 +12,17 @@ const MovieList = ({
   handleClickHeart,
   buttonSrcTrash,
   handleClickTrash,
-  showBtn,
+  showBtnGetMore,
+  showBtnClearFav,
+  showBtnClearWatchLater,
+  getMoreMovies,
 }) => {
-  const { totalPages, currentPage, getMoreMovies } = useContext(MovieContext);
+  const {
+    totalPages,
+    currentPage,
+    clearFavourites,
+    clearWatchLater,
+  } = useContext(MovieContext);
 
   if (movies.length > 0) {
     return (
@@ -36,10 +44,14 @@ const MovieList = ({
                 />
               );
             })}
-            {totalPages > currentPage && showBtn && (
-              <SearchFormBtn showBtn onClick={getMoreMovies}>
-                Get More
-              </SearchFormBtn>
+            {totalPages > currentPage && showBtnGetMore && (
+              <SearchFormBtn onClick={getMoreMovies}>Get More</SearchFormBtn>
+            )}
+            {showBtnClearFav && (
+              <SearchFormBtn onClick={clearFavourites}>Clear</SearchFormBtn>
+            )}
+            {showBtnClearWatchLater && (
+              <SearchFormBtn onClick={clearWatchLater}>Clear</SearchFormBtn>
             )}
           </MovieListWrapper>
         </MovieListContainer>

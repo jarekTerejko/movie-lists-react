@@ -74,6 +74,14 @@ const MovieContextProvider = (props) => {
     setWatchLater(newWatchLater);
   };
 
+  const clearFavourites = () => {
+    setFavourites([]);
+  };
+
+  const clearWatchLater = () => {
+    setWatchLater([]);
+  };
+
   const getMovies = async (endpoint) => {
     try {
       const response = await fetch(endpoint);
@@ -156,6 +164,8 @@ const MovieContextProvider = (props) => {
         getMoreMovies,
         totalPages,
         currentPage,
+        clearFavourites,
+        clearWatchLater,
       }}
     >
       {props.children}

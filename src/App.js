@@ -18,7 +18,8 @@ const App = () => {
     handleAddToWatchLater,
     handleRemoveFromWatchLater,
     getMoreMovies,
-    totalPages,
+    clearFavourites,
+    clearWatchLater,
   } = useContext(MovieContext);
 
   const allMovies = "Movies";
@@ -39,8 +40,7 @@ const App = () => {
           buttonSrcHeart={Heart}
           handleClickHeart={handleAddToFavourites}
           getMoreMovies={getMoreMovies}
-          totalPages={totalPages}
-          showBtn={true}
+          showBtnGetMore={true}
         />
         {favourites.length > 0 && (
           <ListTitle
@@ -54,6 +54,8 @@ const App = () => {
           handleClickTrash={handleRemoveFromFavourites}
           buttonSrcTv={Tv}
           handleClickTv={handleAddToWatchLater}
+          showBtnClearFav={true}
+          clearFavourites={clearFavourites}
         />
         {watchLater.length > 0 && (
           <ListTitle
@@ -67,6 +69,8 @@ const App = () => {
           handleClickTrash={handleRemoveFromWatchLater}
           buttonSrcHeart={Heart}
           handleClickHeart={handleAddToFavourites}
+          showBtnClearWatchLater={true}
+          clearWatchLater={clearWatchLater}
         />
       </Container>
     </>
