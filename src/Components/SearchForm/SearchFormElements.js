@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-export const SearchFormWrapper = styled.form`
+export const SearchFormWrapper = styled.div`
+  padding: 3rem 0;
+`;
+
+export const SearchFormEl = styled.form`
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 10px;
   max-width: 800px;
-  margin: 3rem auto;
+  margin: 0 auto;
   padding: 1.8rem;
   background: #000;
   position: relative;

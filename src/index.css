@@ -12,8 +12,9 @@ html {
 
 body {
   min-height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
-    url("./images/PL-pl-20201228-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./images/background.jpg");
+  box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
