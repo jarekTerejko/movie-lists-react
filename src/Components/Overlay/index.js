@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import StarRating from "../StarRating";
 import { OverlayWrapper } from "./OverlayElements";
+import ChevronDown from "../../images/chevron-down.svg";
+import { MovieContext } from "../../Context/MovieContext";
 
 const Overlay = ({
   title,
@@ -15,6 +17,8 @@ const Overlay = ({
   buttonSrcTrash,
   rating,
 }) => {
+  const { getMovieDetails } = useContext(MovieContext);
+
   return (
     <OverlayWrapper className="overlay">
       <StarRating rating={rating} />
@@ -42,6 +46,11 @@ const Overlay = ({
           movie={movie}
         />
       )}
+      <Button
+        buttonSrc={ChevronDown}
+        handleClick={getMovieDetails}
+        movie={movie.id}
+      />
     </OverlayWrapper>
   );
 };

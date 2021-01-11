@@ -8,6 +8,7 @@ import { MovieContext } from "./Context/MovieContext";
 import Heart from "./images/heart.svg";
 import Trash from "./images/trash.svg";
 import Tv from "./images/tv.svg";
+import Modal from "./Components/Modal";
 
 const App = () => {
   const {
@@ -22,6 +23,7 @@ const App = () => {
     clearFavourites,
     clearWatchLater,
     isLoading,
+    movieDetails,
   } = useContext(MovieContext);
 
   const allMovies = "Movies";
@@ -31,6 +33,7 @@ const App = () => {
   return (
     <>
       {isLoading ? <Loader /> : null}
+      {movieDetails ? <Modal /> : null}
       <Container>
         <SearchForm />
         {movies.length > 0 && (

@@ -1,9 +1,9 @@
 import React from "react";
 import { ButtonImg, ButtonWrapper } from "./ButtonElements";
 
-const Button = ({ buttonSrc, handleClick, movie }) => {
+const Button = ({ buttonSrc, handleClick, movie, className }) => {
   return (
-    <ButtonWrapper onClick={() => handleClick(movie)}>
+    <ButtonWrapper className={className} onClick={() => handleClick(movie)}>
       <ButtonImg src={buttonSrc} />
     </ButtonWrapper>
   );

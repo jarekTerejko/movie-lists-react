@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-import { apiKey, apiUrl, imgBaseUrl, imgPoster } from "../config";
+import { apiKey, apiUrl, imgBaseUrl, imgPoster, imgBig } from "../config";
 
 export const MovieContext = createContext();
 
@@ -15,6 +15,7 @@ const MovieContextProvider = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -148,12 +149,30 @@ const MovieContextProvider = (props) => {
     }
   };
 
+  const getMovieDetails = async (id) => {
+    const endpoint = `${apiUrl}movie/${id}?api_key=${apiKey}`;
+
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    console.log(data);
+    if (data) {
+      setMovieDetails(data);
+      document.body.style.overflow = "hidden";
+    }
+  };
+
+  const closeModal = () => {
+    document.body.style.overflow = "";
+    setMovieDetails(null);
+  };
+
   return (
     <MovieContext.Provider
       value={{
         movies,
         imgBaseUrl,
         imgPoster,
+        imgBig,
         favourites,
         watchLater,
         handleAddToFavourites,
@@ -170,6 +189,9 @@ const MovieContextProvider = (props) => {
         clearFavourites,
         clearWatchLater,
         isLoading,
+        movieDetails,
+        getMovieDetails,
+        closeModal,
       }}
     >
       {props.children}
