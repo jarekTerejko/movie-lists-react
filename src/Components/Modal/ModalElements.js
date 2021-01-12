@@ -10,7 +10,7 @@ export const ModalOverlay = styled.div`
   right: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  padding: 3rem 0;
+  padding: 3rem 2rem;
   overflow-y: scroll;
 `;
 
@@ -36,7 +36,7 @@ export const ModalBgImg = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 1));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 1));
   }
 `;
 
@@ -48,17 +48,24 @@ export const ModalContent = styled.div`
 `;
 export const ModalContentColLeft = styled.div``;
 
-export const ModalIcon = styled.img``;
+export const ModalIcon = styled.img`
+  margin-right: 1rem;
+`;
 
 export const ModalContentColRight = styled.div``;
 
 export const ModalMovieTitle = styled.h2`
+  grid-column: 1/3;
   font-size: 4rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const ModalContentP = styled.p`
   margin-bottom: 1rem;
   font-size: 1.4rem;
   line-height: 1.5;
+  display: flex;
+  align-items: center;
 `;

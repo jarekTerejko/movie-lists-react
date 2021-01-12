@@ -6,10 +6,10 @@ import {
 } from "./StarRatingElements";
 import Star from "../../images/star.svg";
 
-const StarRating = ({ rating }) => {
+const StarRating = ({ rating, starSrc }) => {
   return (
     <StarRatingWrapper>
-      <StarRatingImg src={Star} />
+      <StarRatingImg src={starSrc ? starSrc : Star} />
       <StarRatingNumber>{rating}</StarRatingNumber>
     </StarRatingWrapper>
   );

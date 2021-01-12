@@ -16,6 +16,9 @@ import CloseX from "../../images/x.svg";
 import Calendar from "../../images/calendar.svg";
 import Clock from "../../images/clock.svg";
 import DollarSign from "../../images/dollar-sign.svg";
+import Film from "../../images/film.svg";
+import StarWhite from "../../images/star--white.svg";
+import StarRating from "../StarRating";
 
 const Modal = () => {
   const { movieDetails, closeModal, imgBig, imgBaseUrl } = useContext(
@@ -40,7 +43,9 @@ const Modal = () => {
       <ModalWrapper>
         <ModalBgImg
           style={{
-            backgroundImage: `url(${imgBaseUrl}${imgBig}${movieDetails.backdrop_path})`,
+            background: movieDetails.backdrop_path
+              ? `linear-gradient(to bottom, rgba(0,0,0,.1) 20%, rgba(0,0,0,.9) 100%), url('${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}')`
+              : "black",
           }}
         >
           <Button
@@ -50,13 +55,34 @@ const Modal = () => {
           />
         </ModalBgImg>
         <ModalContent>
+          <ModalMovieTitle>
+            {movieDetails.title}
+            <StarRating
+              starSrc={StarWhite}
+              rating={movieDetails.vote_average}
+            />
+          </ModalMovieTitle>
           <ModalContentColLeft>
-            <ModalMovieTitle>{movieDetails.title}</ModalMovieTitle>
             {movieDetails.overview ? (
               <ModalContentP> {movieDetails.overview}</ModalContentP>
             ) : null}
           </ModalContentColLeft>
           <ModalContentColRight>
+            <ModalContentP>
+              <ModalIcon src={Film} />
+              <span>
+                {movieDetails.genres
+                  ? movieDetails.genres.map((item, i, arr) => {
+                      return (
+                        <span key={item.id}>
+                          {item.name}
+                          {i + 1 < arr.length ? ", " : ""}
+                        </span>
+                      );
+                    })
+                  : null}
+              </span>
+            </ModalContentP>
             {movieDetails.runtime ? (
               <ModalContentP>
                 <ModalIcon src={Clock} /> {convertTime(movieDetails.runtime)}
