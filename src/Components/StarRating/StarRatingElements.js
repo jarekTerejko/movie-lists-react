@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StarRatingWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: ${(props) => (props.noMarginLeft ? "0" : "1rem")};
 `;
 
 export const StarRatingImg = styled.img``;

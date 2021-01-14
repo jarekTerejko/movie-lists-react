@@ -6,9 +6,9 @@ import {
 } from "./StarRatingElements";
 import Star from "../../images/star.svg";
 
-const StarRating = ({ rating, starSrc }) => {
+const StarRating = ({ rating, starSrc, noMarginLeft }) => {
   return (
-    <StarRatingWrapper>
+    <StarRatingWrapper noMarginLeft={noMarginLeft}>
       <StarRatingImg src={starSrc ? starSrc : Star} />
       <StarRatingNumber>{rating}</StarRatingNumber>
     </StarRatingWrapper>

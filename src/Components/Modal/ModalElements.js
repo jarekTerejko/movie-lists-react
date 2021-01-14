@@ -57,13 +57,21 @@ export const ModalContent = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 `;
-export const ModalContentColLeft = styled.div``;
+export const ModalContentColLeft = styled.div`
+  @media screen and (max-width: 500px) {
+    grid-column: 1/3;
+  }
+`;
 
 export const ModalIcon = styled.img`
   margin-right: 1rem;
 `;
 
-export const ModalContentColRight = styled.div``;
+export const ModalContentColRight = styled.div`
+  @media screen and (max-width: 500px) {
+    grid-column: 1/3;
+  }
+`;
 
 export const ModalMovieTitle = styled.h2`
   grid-column: 1/3;

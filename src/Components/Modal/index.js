@@ -73,17 +73,15 @@ const Modal = () => {
           />
         </ModalBgImg>
         <ModalContent>
-          <ModalFlexWrapper
-            gridColumn
-            style={{ gridColumn: "1/3", justifyContent: "space-between" }}
-          >
+          <div style={{ gridColumn: "1/3" }}>
             <ModalMovieTitle>{movieDetails.title}</ModalMovieTitle>
             <StarRating
+              noMarginLeft
               starSrc={StarWhite}
               rating={movieDetails.vote_average}
             />
-          </ModalFlexWrapper>
-          <div>
+          </div>
+          <ModalContentColLeft>
             {director.length > 0 ? <span>Director</span> : null}
             {director ? (
               <ModalContentP>
@@ -97,8 +95,8 @@ const Modal = () => {
                 })}
               </ModalContentP>
             ) : null}
-          </div>
-          <div>
+          </ModalContentColLeft>
+          <ModalContentColLeft>
             {screenplay.length > 0 ? <span>Screenplay</span> : null}
             {screenplay ? (
               <ModalContentP>
@@ -112,7 +110,7 @@ const Modal = () => {
                 })}
               </ModalContentP>
             ) : null}
-          </div>
+          </ModalContentColLeft>
           <ModalContentColLeft>
             {movieDetails.overview ? (
               <ModalContentP> {movieDetails.overview}</ModalContentP>
