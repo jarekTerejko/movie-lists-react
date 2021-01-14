@@ -17,6 +17,9 @@ const MovieContextProvider = (props) => {
   const [totalPages, setTotalPages] = useState(0);
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [cast, setCast] = useState([]);
+  const [director, setDirector] = useState([]);
+  const [screenplay, setScreenplay] = useState([]);
 
   useEffect(() => {
     const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=1`;
@@ -150,20 +153,46 @@ const MovieContextProvider = (props) => {
   };
 
   const getMovieDetails = async (id) => {
-    const endpoint = `${apiUrl}movie/${id}?api_key=${apiKey}`;
+    try {
+      setIsLoading(true);
+      const endpoint = `${apiUrl}movie/${id}?api_key=${apiKey}`;
+      const response = await fetch(endpoint);
+      const data = await response.json();
 
-    const response = await fetch(endpoint);
-    const data = await response.json();
-    console.log(data);
-    if (data) {
-      setMovieDetails(data);
-      document.body.style.overflow = "hidden";
+      getMoviePeople(id);
+      console.log(data);
+      if (data) {
+        setMovieDetails(data);
+        document.body.style.overflow = "hidden";
+      }
+      setIsLoading(false);
+    } catch (error) {
+      isLoading(false);
+      console.log(error);
+    }
+  };
+
+  const getMoviePeople = async (id) => {
+    try {
+      const endpoint = `${apiUrl}movie/${id}/credits?api_key=${apiKey}`;
+      const response = await fetch(endpoint);
+      const data = await response.json();
+      console.log(data, "get people");
+      if (data) {
+        setCast(data.cast);
+        setDirector(data.crew.filter((item) => item.job === "Director"));
+        setScreenplay(data.crew.filter((item) => item.job === "Screenplay"));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const closeModal = () => {
     document.body.style.overflow = "";
     setMovieDetails(null);
+    setCast([]);
+    setDirector([]);
   };
 
   return (
@@ -192,6 +221,10 @@ const MovieContextProvider = (props) => {
         movieDetails,
         getMovieDetails,
         closeModal,
+        getMoviePeople,
+        director,
+        cast,
+        screenplay,
       }}
     >
       {props.children}

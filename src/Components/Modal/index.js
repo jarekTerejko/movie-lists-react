@@ -11,6 +11,7 @@ import {
   ModalContentColRight,
   ModalContentP,
   ModalIcon,
+  ModalFlexWrapper,
 } from "./ModalElements";
 import CloseX from "../../images/x.svg";
 import Calendar from "../../images/calendar.svg";
@@ -19,12 +20,29 @@ import DollarSign from "../../images/dollar-sign.svg";
 import Film from "../../images/film.svg";
 import StarWhite from "../../images/star--white.svg";
 import StarRating from "../StarRating";
+import {
+  MovieListContainer,
+  MovieListWrapper,
+} from "../MovieList/MovieListElements";
+import {
+  MovieCardPoster,
+  MovieCardWrapper,
+} from "../MovieCard/MovieCardElements";
+import NoImage from "../../images/no-image-available.jpg";
 
 const Modal = () => {
-  const { movieDetails, closeModal, imgBig, imgBaseUrl } = useContext(
-    MovieContext
-  );
+  const {
+    movieDetails,
+    closeModal,
+    imgBig,
+    imgPoster,
+    imgBaseUrl,
+    director,
+    screenplay,
+    cast,
+  } = useContext(MovieContext);
   console.log(movieDetails);
+  console.log(director);
 
   const convertTime = (data) => {
     const min = data % 60;
@@ -38,15 +56,15 @@ const Modal = () => {
     minimumFractionDigits: 2,
   });
 
+  const modalBgDesktop = `url('${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}')`;
+  const modalBgMobile = `url("${imgBaseUrl}${imgPoster}${movieDetails.poster_path}")`;
+
   return (
     <ModalOverlay>
       <ModalWrapper>
         <ModalBgImg
-          style={{
-            background: movieDetails.backdrop_path
-              ? `linear-gradient(to bottom, rgba(0,0,0,.1) 20%, rgba(0,0,0,.9) 100%), url('${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}')`
-              : "black",
-          }}
+          modalBgDesktop={modalBgDesktop}
+          modalBgMobile={modalBgMobile}
         >
           <Button
             className="modal-close"
@@ -55,20 +73,53 @@ const Modal = () => {
           />
         </ModalBgImg>
         <ModalContent>
-          <ModalMovieTitle>
-            {movieDetails.title}
+          <ModalFlexWrapper
+            gridColumn
+            style={{ gridColumn: "1/3", justifyContent: "space-between" }}
+          >
+            <ModalMovieTitle>{movieDetails.title}</ModalMovieTitle>
             <StarRating
               starSrc={StarWhite}
               rating={movieDetails.vote_average}
             />
-          </ModalMovieTitle>
+          </ModalFlexWrapper>
+          <div>
+            {director.length > 0 ? <span>Director</span> : null}
+            {director ? (
+              <ModalContentP>
+                {director.map((person, i, arr) => {
+                  return (
+                    <span key={i}>
+                      {person.name}
+                      {i + 1 < arr.length ? ", " : ""}
+                    </span>
+                  );
+                })}
+              </ModalContentP>
+            ) : null}
+          </div>
+          <div>
+            {screenplay.length > 0 ? <span>Screenplay</span> : null}
+            {screenplay ? (
+              <ModalContentP>
+                {screenplay.map((person, i, arr) => {
+                  return (
+                    <span key={i}>
+                      {person.name}
+                      {i + 1 < arr.length ? ", " : ""}
+                    </span>
+                  );
+                })}
+              </ModalContentP>
+            ) : null}
+          </div>
           <ModalContentColLeft>
             {movieDetails.overview ? (
               <ModalContentP> {movieDetails.overview}</ModalContentP>
             ) : null}
           </ModalContentColLeft>
           <ModalContentColRight>
-            <ModalContentP>
+            <ModalFlexWrapper marginBottom={"1rem"}>
               <ModalIcon src={Film} />
               <span>
                 {movieDetails.genres
@@ -82,25 +133,58 @@ const Modal = () => {
                     })
                   : null}
               </span>
-            </ModalContentP>
+            </ModalFlexWrapper>
             {movieDetails.runtime ? (
-              <ModalContentP>
-                <ModalIcon src={Clock} /> {convertTime(movieDetails.runtime)}
-              </ModalContentP>
+              <ModalFlexWrapper marginBottom={"1rem"}>
+                <ModalIcon src={Clock} />{" "}
+                <span>{convertTime(movieDetails.runtime)}</span>
+              </ModalFlexWrapper>
             ) : null}
             {movieDetails.release_date ? (
-              <ModalContentP>
+              <ModalFlexWrapper marginBottom={"1rem"}>
                 <ModalIcon src={Calendar} />
                 {movieDetails.release_date}
-              </ModalContentP>
+              </ModalFlexWrapper>
             ) : null}
             {movieDetails.budget ? (
-              <ModalContentP>
-                <ModalIcon src={DollarSign} />{" "}
+              <ModalFlexWrapper marginBottom={"1rem"}>
+                <ModalIcon src={DollarSign} />
                 {formatter.format(movieDetails.budget)}
-              </ModalContentP>
+              </ModalFlexWrapper>
             ) : null}
           </ModalContentColRight>
+          <MovieListWrapper style={{ gridColumn: "1/3" }}>
+            <MovieListContainer>
+              <MovieListWrapper>
+                {cast.map((actor, i) => {
+                  return (
+                    <MovieCardWrapper style={{ width: "200px" }} key={i}>
+                      <MovieCardPoster
+                        src={
+                          actor.profile_path
+                            ? `${imgBaseUrl}${imgPoster}${actor.profile_path}`
+                            : NoImage
+                        }
+                      />
+                      <div
+                        style={{
+                          padding: "1rem 1rem 2rem 1rem",
+                          background: "#f1f1f1",
+                        }}
+                      >
+                        <ModalContentP
+                          style={{ color: "#000", fontWeight: 700 }}
+                        >
+                          {actor.name}
+                        </ModalContentP>
+                        <span style={{ color: "#000" }}>{actor.character}</span>
+                      </div>
+                    </MovieCardWrapper>
+                  );
+                })}
+              </MovieListWrapper>
+            </MovieListContainer>
+          </MovieListWrapper>
         </ModalContent>
       </ModalWrapper>
     </ModalOverlay>

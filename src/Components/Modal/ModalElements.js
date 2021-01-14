@@ -27,10 +27,21 @@ export const ModalBgImg = styled.div`
   min-height: 72rem;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
+  background: ${(props) =>
+    props.modalBgDesktop ? `${props.modalBgDesktop}` : "black"};
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+
+  @media screen and (max-width: 500px) {
+    background: ${(props) =>
+      props.modalBgMobile ? `${props.modalBgMobile}` : "black"};
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -57,15 +68,17 @@ export const ModalContentColRight = styled.div``;
 export const ModalMovieTitle = styled.h2`
   grid-column: 1/3;
   font-size: 4rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
 `;
 
 export const ModalContentP = styled.p`
   margin-bottom: 1rem;
   font-size: 1.4rem;
   line-height: 1.5;
+`;
+
+export const ModalFlexWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: ${(props) =>
+    props.marginBottom ? `${props.marginBottom}` : ""};
 `;
