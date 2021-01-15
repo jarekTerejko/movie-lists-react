@@ -25,6 +25,7 @@ const MovieCard = ({
             ? `${imgBaseUrl}${imgPoster}${movie.poster_path}`
             : NoImage
         }
+        alt={movie.title}
       />
       <Overlay
         rating={movie.vote_average}

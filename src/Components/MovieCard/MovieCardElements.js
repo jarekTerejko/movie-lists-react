@@ -8,6 +8,10 @@ export const MovieCardWrapper = styled.div`
   position: relative;
   border-radius: 1rem;
 
+  @media screen and (max-width: 370px) {
+    width: 250px;
+  }
+
   &:hover {
     transform: scale(1.1);
   }

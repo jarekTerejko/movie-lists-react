@@ -8,7 +8,7 @@ const Button = ({ buttonSrc, handleClick, movie, className, title }) => {
       title={title}
       onClick={() => handleClick(movie)}
     >
-      <ButtonImg src={buttonSrc} />
+      <ButtonImg src={buttonSrc} alt="" />
     </ButtonWrapper>
   );
 };
