@@ -76,6 +76,7 @@ export const ModalContentColRight = styled.div`
 export const ModalMovieTitle = styled.h2`
   grid-column: 1/3;
   font-size: 4rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const ModalContentP = styled.p`

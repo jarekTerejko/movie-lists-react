@@ -28,6 +28,7 @@ const Overlay = ({
           buttonSrc={buttonSrcHeart}
           handleClick={handleClickHeart}
           movie={movie}
+          title="Add to Favourites"
         />
       )}
 
@@ -36,6 +37,7 @@ const Overlay = ({
           buttonSrc={buttonSrcTv}
           handleClick={handleClickTv}
           movie={movie}
+          title="Add to Watchlist"
         />
       )}
 
@@ -44,12 +46,14 @@ const Overlay = ({
           buttonSrc={buttonSrcTrash}
           handleClick={handleClickTrash}
           movie={movie}
+          title="Remove from List"
         />
       )}
       <Button
         buttonSrc={ChevronDown}
         handleClick={getMovieDetails}
         movie={movie.id}
+        title="More Info"
       />
     </OverlayWrapper>
   );
