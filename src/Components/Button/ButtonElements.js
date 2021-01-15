@@ -5,13 +5,18 @@ export const ButtonWrapper = styled.button`
   background: #000;
   padding: 1rem;
   cursor: pointer;
-  margin: 1rem;
+  margin: 0.5rem;
   padding: 1.2rem;
   border-radius: 50%;
 
+  &:first-of-type {
+    margin-left: 1rem;
+  }
+
   &.modal-close {
     position: absolute;
-    right: 0;
+    right: 1rem;
+    top: 1rem;
   }
 `;
 
