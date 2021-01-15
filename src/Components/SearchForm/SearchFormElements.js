@@ -14,6 +14,10 @@ export const SearchFormEl = styled.form`
   background: #000;
   position: relative;
   border-radius: 4rem;
+
+  @media screen and (max-width: 500px) {
+    padding: 1rem;
+  }
 `;
 
 export const SearchFormInput = styled.input`
@@ -24,10 +28,19 @@ export const SearchFormInput = styled.input`
   width: 100%;
   font-size: 1.8rem;
 
+  @media screen and (max-width: 500px) {
+    font-size: 1.6rem;
+    padding: 0.8rem 0.8rem 0.8rem 5rem;
+  }
+
   &::placeholder {
     color: #f1f1f1;
     font-size: 1.8rem;
     font-family: "Montserrat", sans-serif;
+
+    @media screen and (max-width: 500px) {
+      font-size: 1.6rem;
+    }
   }
 `;
 
@@ -47,13 +60,22 @@ export const SearchFormBtn = styled.button`
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   white-space: nowrap;
-  display: ${(showBtn) => (showBtn ? "block" : "none")};
+  /* display: ${(showBtn) => (showBtn ? "block" : "none")}; */
   margin: ${(showBtn) => (showBtn ? "0 1.5rem" : "")};
   cursor: pointer;
+
+  @media screen and (max-width: 500px) {
+    padding: 0.8rem 2rem;
+  }
 `;
 
 export const SearchFormImg = styled.img`
   position: absolute;
   top: 26px;
   left: 30px;
+
+  @media screen and (max-width: 500px) {
+    top: 18px;
+    left: 20px;
+  }
 `;
