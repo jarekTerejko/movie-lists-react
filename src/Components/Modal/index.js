@@ -12,7 +12,7 @@ import {
   ModalContentP,
   ModalIcon,
   ModalFlexWrapper,
-  ModalMobilePoster,
+  ModalImg,
 } from "./ModalElements";
 import CloseX from "../../images/x.svg";
 import Calendar from "../../images/calendar.svg";
@@ -57,16 +57,20 @@ const Modal = () => {
     minimumFractionDigits: 2,
   });
 
-  const modalBgDesktop = `url('${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}')`;
+  const modalBgDesktop = `${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}`;
   const modalBgMobile = `${imgBaseUrl}${imgPoster}${movieDetails.poster_path}`;
 
   return (
     <ModalOverlay>
       <ModalWrapper>
-        <ModalBgImg modalBgDesktop={modalBgDesktop}>
-          <ModalMobilePoster
+        <ModalBgImg>
+          <ModalImg
+            imgDesktop
+            src={movieDetails.backdrop_path ? modalBgDesktop : NoImage}
+          />
+          <ModalImg
+            imgMobile
             src={movieDetails.poster_path ? modalBgMobile : NoImage}
-            alt={`${movieDetails.title} Poster`}
           />
           <Button
             className="modal-close"

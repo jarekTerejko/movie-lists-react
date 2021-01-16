@@ -24,20 +24,12 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalBgImg = styled.div`
-  min-height: 72rem;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  background: ${(props) =>
-    props.modalBgDesktop ? `${props.modalBgDesktop}` : "black"};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-
-  @media screen and (max-width: 500px) {
-    background: black;
-    min-height: unset;
-  }
 
   &::before {
     content: "";
@@ -48,15 +40,17 @@ export const ModalBgImg = styled.div`
   }
 `;
 
-export const ModalMobilePoster = styled.img`
-  display: none;
+export const ModalImg = styled.img`
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-
   @media screen and (max-width: 500px) {
-    display: block;
+    display: ${(props) => (props.imgDesktop ? "none" : "block")};
   }
-`
+
+  @media screen and (min-width: 500px) {
+    display: ${(props) => (props.imgMobile ? "none" : "block")};
+  }
+`;
 
 export const ModalContent = styled.div`
   padding: 3rem;
