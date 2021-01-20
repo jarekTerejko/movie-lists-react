@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const MovieCardWrapper = styled.div`
+export const MovieCardWrapper = styled(motion.div)`
   width: 300px;
   overflow: hidden;
   margin: 2rem 1.5rem;

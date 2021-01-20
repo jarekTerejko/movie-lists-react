@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const ModalOverlay = styled.div`
+export const ModalOverlay = styled(motion.div)`
   width: 100%;
   min-height: 100vh;
   position: fixed;
@@ -14,7 +15,7 @@ export const ModalOverlay = styled.div`
   overflow-y: scroll;
 `;
 
-export const ModalWrapper = styled.div`
+export const ModalWrapper = styled(motion.div)`
   position: relative;
   min-height: 80rem;
   background: rgba(0, 0, 0, 0.99);

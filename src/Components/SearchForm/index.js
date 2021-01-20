@@ -12,7 +12,11 @@ const SearchForm = () => {
   const { searchTerm, setSearchTerm, handleSubmit } = useContext(MovieContext);
 
   return (
-    <SearchFormWrapper>
+    <SearchFormWrapper
+      transition={{ delay: 1.2 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <SearchFormEl onSubmit={handleSubmit}>
         <SearchFormInput
           type="text"

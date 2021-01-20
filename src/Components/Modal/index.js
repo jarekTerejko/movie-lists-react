@@ -61,8 +61,12 @@ const Modal = () => {
   const modalBgMobile = `${imgBaseUrl}${imgPoster}${movieDetails.poster_path}`;
 
   return (
-    <ModalOverlay>
-      <ModalWrapper>
+    <ModalOverlay initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <ModalWrapper
+        transition={{ delay: 0.2 }}
+        initial={{ y: "-200vh" }}
+        animate={{ y: 0 }}
+      >
         <ModalBgImg>
           <ModalImg
             imgDesktop

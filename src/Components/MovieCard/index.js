@@ -18,7 +18,12 @@ const MovieCard = ({
   const { imgBaseUrl, imgPoster } = useContext(MovieContext);
 
   return (
-    <MovieCardWrapper>
+    <MovieCardWrapper
+      whileHover={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <MovieCardPoster
         src={
           movie.poster_path

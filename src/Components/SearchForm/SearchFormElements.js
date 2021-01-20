@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const SearchFormWrapper = styled.div`
+export const SearchFormWrapper = styled(motion.div)`
   padding: 3rem 0;
 `;
 
