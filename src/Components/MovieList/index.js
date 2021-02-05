@@ -25,9 +25,9 @@ const MovieList = ({
   } = useContext(MovieContext);
 
   if (movies.length > 0) {
+    // console.log(movies)
     return (
       <MovieListWrapper>
-        {console.log(movies)}
         <MovieListContainer>
           <MovieListWrapper>
             {movies.map((movie, i) => {

@@ -20,6 +20,7 @@ const MovieContextProvider = (props) => {
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState([]);
   const [screenplay, setScreenplay] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const endpoint = `${apiUrl}movie/popular?api_key=${apiKey}&page=1`;
@@ -92,7 +93,7 @@ const MovieContextProvider = (props) => {
       setIsLoading(true);
       const response = await fetch(endpoint);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (data.results) {
         setIsLoading(false);
         setMovies(data.results);
@@ -160,12 +161,12 @@ const MovieContextProvider = (props) => {
       const data = await response.json();
 
       getMoviePeople(id);
-      console.log(data);
+      // console.log(data);
       if (data) {
         setMovieDetails(data);
-        document.body.style.overflow = "hidden";
+        openModal();
+        setIsLoading(false);
       }
-      setIsLoading(false);
     } catch (error) {
       isLoading(false);
       console.log(error);
@@ -177,7 +178,7 @@ const MovieContextProvider = (props) => {
       const endpoint = `${apiUrl}movie/${id}/credits?api_key=${apiKey}`;
       const response = await fetch(endpoint);
       const data = await response.json();
-      console.log(data, "get people");
+      // console.log(data, "get people");
       if (data) {
         setCast(data.cast);
         setDirector(data.crew.filter((item) => item.job === "Director"));
@@ -188,8 +189,14 @@ const MovieContextProvider = (props) => {
     }
   };
 
+  const openModal = () => {
+    document.body.style.overflow = "hidden";
+    setShowModal(true);
+  };
+
   const closeModal = () => {
     document.body.style.overflow = "";
+    setShowModal(false);
     setMovieDetails(null);
     setCast([]);
     setDirector([]);
@@ -225,6 +232,7 @@ const MovieContextProvider = (props) => {
         director,
         cast,
         screenplay,
+        showModal,
       }}
     >
       {props.children}

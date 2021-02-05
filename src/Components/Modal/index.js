@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { MovieContext } from "../../Context/MovieContext";
 import Button from "../Button";
 import {
@@ -32,6 +32,8 @@ import {
 import NoImage from "../../images/no-image-available.jpg";
 
 const Modal = () => {
+  const modalRef = useRef();
+
   const {
     movieDetails,
     closeModal,
@@ -41,9 +43,10 @@ const Modal = () => {
     director,
     screenplay,
     cast,
+    showModal,
   } = useContext(MovieContext);
-  console.log(movieDetails);
-  console.log(director);
+  // console.log(movieDetails);
+  // console.log(director);
 
   const convertTime = (data) => {
     const min = data % 60;
@@ -60,8 +63,19 @@ const Modal = () => {
   const modalBgDesktop = `${imgBaseUrl}${imgBig}${movieDetails.backdrop_path}`;
   const modalBgMobile = `${imgBaseUrl}${imgPoster}${movieDetails.poster_path}`;
 
-  return (
-    <ModalOverlay initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+  const closeModalBg = (e) => {
+    if (modalRef.current === e.target) {
+      closeModal();
+    }
+  };
+
+  return showModal ? (
+    <ModalOverlay
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      ref={modalRef}
+      onClick={closeModalBg}
+    >
       <ModalWrapper
         transition={{ delay: 0.2 }}
         initial={{ y: "-200vh" }}
@@ -197,7 +211,7 @@ const Modal = () => {
         </ModalContent>
       </ModalWrapper>
     </ModalOverlay>
-  );
+  ) : null;
 };
 
 export default Modal;
